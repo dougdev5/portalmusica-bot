@@ -36,6 +36,8 @@ bot.on("message", function(message) {
             message.channel.send("```Portal Música\n\nComandos:\npm.ouvir <link>\npm.pular\npm.parar```");
         break;
         case "ouvir":
+            message.delete();
+            
             if (!args[1]) {
                 message.channel.send("Por-favor coloque um link!");
                 return;
@@ -59,11 +61,15 @@ bot.on("message", function(message) {
             });
         break;
         case "pular":
+            message.delete();
+            
             var server = servers[message.guild.id];
 
             if (server.dispatcher) server.dispatcher.end();
         break;
         case "parar":
+            message.delete();
+            
             var server = servers[message.guild.id];
 
             if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
