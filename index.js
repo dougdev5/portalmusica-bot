@@ -37,6 +37,8 @@ bot.on("message", function(message) {
         break;
         case "ouvir":
             message.delete();
+            if(!message.member.roles.some(r=>["MANAGE_MESSAGES"].includes(r.name)) )
+                return message.reply("Desculpe, você não tem permissão para usar isso!");
             
             if (!args[1]) {
                 message.channel.send("Por-favor coloque um link!");
@@ -63,12 +65,18 @@ bot.on("message", function(message) {
         case "pular":
             message.delete();
             
+            if(!message.member.roles.some(r=>["MANAGE_MESSAGES"].includes(r.name)) )
+                return message.reply("Desculpe, você não tem permissão para usar isso!");
+            
             var server = servers[message.guild.id];
 
             if (server.dispatcher) server.dispatcher.end();
         break;
         case "parar":
             message.delete();
+            
+            if(!message.member.roles.some(r=>["MANAGE_MESSAGES"].includes(r.name)) )
+                return message.reply("Desculpe, você não tem permissão para usar isso!");
             
             var server = servers[message.guild.id];
 
